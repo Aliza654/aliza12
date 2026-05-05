@@ -1,0 +1,92 @@
+class Doll:
+    def __init__(self, name, brand, price, year):
+        self.name = name
+        self.brand = brand
+        self.price = price
+        self.year = year
+
+    def display(self):
+        print(f"Name: {self.name}")
+        print(f"Brand: {self.brand}")
+        print(f"Price: ${self.price}")
+        print(f"Year: {self.year}")
+        print("-" * 30)
+
+
+class DollCollection:
+    def __init__(self):
+        self.dolls = []
+
+    # Add a doll
+    def add_doll(self, doll):
+        self.dolls.append(doll)
+        print("Doll added successfully!")
+
+    # View all dolls
+    def show_collection(self):
+        if not self.dolls:
+            print("No dolls in collection.")
+            return
+
+        print("\n--- Doll Collection ---")
+        for doll in self.dolls:
+            doll.display()
+
+    # Search doll by name
+    def search_doll(self, name):
+        for doll in self.dolls:
+            if doll.name.lower() == name.lower():
+                print("\nDoll Found:")
+                doll.display()
+                return
+        print("Doll not found.")
+
+    # Remove doll
+    def remove_doll(self, name):
+        for doll in self.dolls:
+            if doll.name.lower() == name.lower():
+                self.dolls.remove(doll)
+                print("Doll removed successfully!")
+                return
+        print("Doll not found.")
+
+
+# ---------------- MAIN PROGRAM ----------------
+
+collection = DollCollection()
+
+while True:
+    print("\n1. Add Doll")
+    print("2. View Collection")
+    print("3. Search Doll")
+    print("4. Remove Doll")
+    print("5. Exit")
+
+    choice = input("Enter choice: ")
+
+    if choice == "1":
+        name = input("Doll name: ")
+        brand = input("Brand: ")
+        price = float(input("Price: "))
+        year = int(input("Year: "))
+
+        doll = Doll(name, brand, price, year)
+        collection.add_doll(doll)
+
+    elif choice == "2":
+        collection.show_collection()
+
+    elif choice == "3":
+        name = input("Enter doll name to search: ")
+        collection.search_doll(name)
+
+    elif choice == "4":
+        name = input("Enter doll name to remove: ")
+        collection.remove_doll(name)
+
+    elif choice == "5":
+        print("Goodbye!")
+        break
+
+    else:
+        print("Invalid choice!")
